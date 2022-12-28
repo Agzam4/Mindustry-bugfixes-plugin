@@ -1,0 +1,7 @@
+{
+  "name": "Fixed bugs",
+  "author": "Agzam4",
+  "main": "example.ExamplePlugin",
+  "description": "Bug fixed: PayloadConveyor",
+  "version": 1.0
+}
