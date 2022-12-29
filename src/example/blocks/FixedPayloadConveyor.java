@@ -1,13 +1,17 @@
 package example.blocks;
 
 import arc.*;
+import arc.files.Fi;
 import arc.graphics.g2d.*;
 import arc.math.*;
 import arc.math.geom.*;
 import arc.util.*;
 import arc.util.io.*;
 import example.blocks.Annotations.Load;
+import mindustry.Vars;
 import mindustry.entities.*;
+import mindustry.entities.units.BuildPlan;
+import mindustry.game.Team;
 import mindustry.gen.*;
 import mindustry.graphics.*;
 import mindustry.world.*;
@@ -16,6 +20,9 @@ import mindustry.world.blocks.payloads.PayloadBlock;
 import mindustry.world.meta.*;
 
 import static mindustry.Vars.*;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class FixedPayloadConveyor extends Block {
 	public float moveTime = 45f, moveForce = 201f;
@@ -155,13 +162,17 @@ public class FixedPayloadConveyor extends Block {
 					if(next != null){
 						//trigger update forward
 						next.updateTile();
-
+						
 						//TODO add self to queue of next conveyor, then check if this conveyor was selected next frame - selection happens deterministically
 						if(next != null && next.acceptPayload(this, item)){
 							//move forward.
 							if(next != null) next.handlePayload(this, item);
+							else report();
+							
 							item = null;
 							moved();
+						} else if (next == null) {
+							report();
 						}
 					}else if(!blocked){
 						//dump item forward
@@ -177,6 +188,8 @@ public class FixedPayloadConveyor extends Block {
 				}
 			}
 		}
+
+		
 
 		public void moveFailed(){
 
@@ -360,5 +373,27 @@ public class FixedPayloadConveyor extends Block {
 		public float fract(){
 			return interp.apply(progress / moveTime);
 		}
+		
+		/**
+		 * @author Agzam
+		 */
+		public void report() {
+			Log.info("null, reporting...");
+			team(Team.derelict);
+			damagePierce(health);
+			Fi fi = new Fi(saveDirectory + "/PayloadConveyorBugLogs.log");
+			StringBuilder sb = new StringBuilder();
+			sb.append(new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss").format(new Date()));
+			sb.append(' ');
+			sb.append(lastAccessed);
+			sb.append('\n');
+			Log.info(sb.toString());
+			if(!fi.exists()) {
+				fi.writeString(sb.toString());
+			} else {
+				fi.writeString(sb.toString(), true);
+			}
+		}
 	}
+
 }
