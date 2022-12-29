@@ -4,7 +4,12 @@ import arc.graphics.*;
 import arc.math.*;
 import arc.struct.*;
 import mindustry.*;
-import mindustry.content.*;
+import mindustry.content.Fx;
+import mindustry.content.Items;
+import mindustry.content.Liquids;
+import mindustry.content.StatusEffects;
+import mindustry.content.UnitTypes;
+//import mindustry.content.*;
 import mindustry.entities.*;
 import mindustry.entities.abilities.*;
 import mindustry.entities.bullet.*;
@@ -376,9 +381,9 @@ public class FixedBlocks{
             walkSoundPitchMax = 0.5f;
         }};
 
-        ((ShallowLiquid)darksandTaintedWater).set(Blocks.taintedWater, Blocks.darksand);
-        ((ShallowLiquid)sandWater).set(Blocks.water, Blocks.sand);
-        ((ShallowLiquid)darksandWater).set(Blocks.water, Blocks.darksand);
+        ((ShallowLiquid)darksandTaintedWater).set(FixedBlocks.taintedWater, FixedBlocks.darksand);
+        ((ShallowLiquid)sandWater).set(FixedBlocks.water, FixedBlocks.sand);
+        ((ShallowLiquid)darksandWater).set(FixedBlocks.water,FixedBlocks.darksand);
 
         dacite = new Floor("dacite");
 
@@ -5489,8 +5494,8 @@ public class FixedBlocks{
             regionSuffix = "-dark";
             size = 5;
             plans.add(
-            new AssemblerUnitPlan(UnitTypes.vanquish, 60f * 50f, PayloadStack.list(UnitTypes.stell, 4, Blocks.tungstenWallLarge, 10)),
-            new AssemblerUnitPlan(UnitTypes.conquer, 60f * 60f * 3f, PayloadStack.list(UnitTypes.locus, 6, Blocks.carbideWallLarge, 20))
+            new AssemblerUnitPlan(UnitTypes.vanquish, 60f * 50f, PayloadStack.list(UnitTypes.stell, 4, FixedBlocks.tungstenWallLarge, 10)),
+            new AssemblerUnitPlan(UnitTypes.conquer, 60f * 60f * 3f, PayloadStack.list(UnitTypes.locus, 6, FixedBlocks.carbideWallLarge, 20))
             );
             areaSize = 13;
             researchCostMultiplier = 0.4f;
@@ -5504,8 +5509,8 @@ public class FixedBlocks{
             regionSuffix = "-dark";
             size = 5;
             plans.add(
-            new AssemblerUnitPlan(UnitTypes.quell, 60f * 60f, PayloadStack.list(UnitTypes.elude, 4, Blocks.berylliumWallLarge, 8)),
-            new AssemblerUnitPlan(UnitTypes.disrupt, 60f * 60f * 3f, PayloadStack.list(UnitTypes.avert, 6, Blocks.carbideWallLarge, 20))
+            new AssemblerUnitPlan(UnitTypes.quell, 60f * 60f, PayloadStack.list(UnitTypes.elude, 4, FixedBlocks.berylliumWallLarge, 8)),
+            new AssemblerUnitPlan(UnitTypes.disrupt, 60f * 60f * 3f, PayloadStack.list(UnitTypes.avert, 6, FixedBlocks.carbideWallLarge, 20))
             );
             areaSize = 13;
 
@@ -5519,8 +5524,8 @@ public class FixedBlocks{
             size = 5;
             //TODO different reqs
             plans.add(
-            new AssemblerUnitPlan(UnitTypes.tecta, 60f * 70f, PayloadStack.list(UnitTypes.merui, 6, Blocks.tungstenWallLarge, 12)),
-            new AssemblerUnitPlan(UnitTypes.collaris, 60f * 60f * 3f, PayloadStack.list(UnitTypes.cleroi, 6, Blocks.carbideWallLarge, 20))
+            new AssemblerUnitPlan(UnitTypes.tecta, 60f * 70f, PayloadStack.list(UnitTypes.merui, 6, FixedBlocks.tungstenWallLarge, 12)),
+            new AssemblerUnitPlan(UnitTypes.collaris, 60f * 60f * 3f, PayloadStack.list(UnitTypes.cleroi, 6, FixedBlocks.carbideWallLarge, 20))
             );
             areaSize = 13;
 
@@ -5629,7 +5634,7 @@ public class FixedBlocks{
             consumePower(2f);
             size = 3;
             //TODO expand this list
-            filter = Seq.with(Blocks.tungstenWallLarge, Blocks.berylliumWallLarge, Blocks.carbideWallLarge, Blocks.reinforcedSurgeWallLarge, Blocks.reinforcedLiquidContainer, Blocks.reinforcedContainer, Blocks.beamNode);
+            filter = Seq.with(FixedBlocks.tungstenWallLarge, FixedBlocks.berylliumWallLarge, FixedBlocks.carbideWallLarge, FixedBlocks.reinforcedSurgeWallLarge, FixedBlocks.reinforcedLiquidContainer, FixedBlocks.reinforcedContainer, FixedBlocks.beamNode);
         }};
 
         //yes this block is pretty much useless
@@ -5735,10 +5740,10 @@ public class FixedBlocks{
         new LegacyMechPad("legacy-mech-pad");
         new LegacyUnitFactory("legacy-unit-factory");
         new LegacyUnitFactory("legacy-unit-factory-air"){{
-            replacement = Blocks.airFactory;
+            replacement = FixedBlocks.airFactory;
         }};
         new LegacyUnitFactory("legacy-unit-factory-ground"){{
-            replacement = Blocks.groundFactory;
+            replacement = FixedBlocks.groundFactory;
         }};
 
         new LegacyCommandCenter("command-center"){{

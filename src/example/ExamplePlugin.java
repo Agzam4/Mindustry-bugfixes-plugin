@@ -37,25 +37,11 @@ import mindustry.content.TeamEntries;
 import mindustry.content.UnitTypes;
 import mindustry.content.Weathers;
 import mindustry.core.*;
-import mindustry.editor.MapEditor;
-import mindustry.entities.EntityCollisions;
-import mindustry.game.*;
-import mindustry.game.EventType.ContentInitEvent;
-import mindustry.gen.Groups;
-import mindustry.graphics.CacheLayer;
-import mindustry.logic.GlobalVars;
-import mindustry.maps.Map;
-import mindustry.maps.Maps;
 import mindustry.mod.*;
-import mindustry.net.BeControl;
-import mindustry.type.Category;
-import mindustry.ui.dialogs.LanguageDialog;
-import mindustry.world.Tile;
-import mindustry.world.blocks.payloads.PayloadConveyor;
-import mindustry.world.blocks.payloads.PayloadRouter;
-import mindustry.game.EventType.*;
+import mindustry.world.Block;
+import mindustry.world.blocks.environment.Floor;
+import mindustry.world.blocks.environment.OverlayFloor;
 
-import static arc.Core.settings;
 import static mindustry.Vars.*;
 
 public class ExamplePlugin extends Plugin{
@@ -83,7 +69,7 @@ public class ExamplePlugin extends Plugin{
 		}
         content.createModContent();
         content.init();
-        bases.load();
+//        bases.load();
 //        Events.fire(new ServerLoadEvent());
         
         Log.info(state.hasSpawns());
@@ -112,9 +98,14 @@ public class ExamplePlugin extends Plugin{
         }
         try {
         	for (int i = 0; i < fixedFields.length; i++) {
-        		if(defaultFields[i].getName().equals(fixedFields[i].getName())) {
-        			Object value = fixedFields[i].get(FixedBlocks.class);
-        			defaultFields[i].set(Blocks.class, value);
+        		Field d = defaultFields[i];
+        		Field f = fixedFields[i];
+        		if(d.getName().equals(f.getName())) {
+        			Block block = (Block) f.get(FixedBlocks.class);
+        			if(block == null) continue;
+        			if(block.isFloor()) d.set(Blocks.class, (Floor)block);
+        			if(block.isOverlay()) d.set(Blocks.class, (OverlayFloor)block);
+        			else d.set(Blocks.class, block);
         		} else {
         			throw new Exception("default fields not equals fixed fields");
         		}
