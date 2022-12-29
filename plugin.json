@@ -3,6 +3,6 @@
   "author": "Agzam4",
   "main": "example.ExamplePlugin",
   "description": "Bug fixed: PayloadConveyor",
-  "version": 1.1,
+  "version": 1.2,
   "minGameVersion": 136
 }
