@@ -1,4 +1,5 @@
 # Mindustry-bugfixes-plugin
 ![GitHub all releases](https://img.shields.io/github/downloads/Agzam4/Mindustry-bugfixes-plugin/total?color=%23f07&style=for-the-badge)
-Fixed bugs:
+
+### Fixed bugs:
 * Payload router crush
